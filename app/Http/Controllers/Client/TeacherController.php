@@ -174,7 +174,7 @@ class TeacherController extends Controller
             });
         }
 
-        $members = $query->paginate(1)->appends($request->all());
+        $members = $query->paginate(5)->appends($request->all());
         if ($members->currentPage() > $members->lastPage()) {
             return redirect()->route('admin.teacherlist', ['page' => $members->lastPage()]);
         }

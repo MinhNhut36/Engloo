@@ -5,10 +5,10 @@ namespace App\Enum;
 enum enrollment: int
 {
     // đã hoàn thành: 0 , đang học: 1, đạt:2, không đạt:3
-    case completed = 0;
-    case studying = 1;
-    case pass = 2;
-    case fail =3;
+    case completed = 1;
+    case studying = 2;
+    case pass = 3;
+    case fail =4;
 
     public function getEnrollment(): string
     {

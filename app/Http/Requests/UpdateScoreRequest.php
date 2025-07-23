@@ -26,7 +26,7 @@ class UpdateScoreRequest extends FormRequest
             'grades.*.speaking_score'   => 'nullable|numeric|min:0|max:10',
             'grades.*.writing_score'    => 'nullable|numeric|min:0|max:10',
             'grades.*.reading_score'    => 'nullable|numeric|min:0|max:10',
-            'grades.*.exam_date'        => 'nullable|date',
+            'grades.*.exam_date'        => 'nullable',
         ];
     }
 
@@ -57,8 +57,6 @@ class UpdateScoreRequest extends FormRequest
             'grades.*.reading_score.numeric' => 'Điểm đọc phải là số.',
             'grades.*.reading_score.min' => 'Điểm đọc phải từ 0 đến 10.',
             'grades.*.reading_score.max' => 'Điểm đọc phải từ 0 đến 10.',
-
-            'grades.*.exam_date.date' => 'Ngày thi không hợp lệ.',
         ];
     }
 }

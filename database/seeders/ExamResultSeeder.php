@@ -44,7 +44,7 @@ class ExamResultSeeder extends Seeder
         ExamResult::create([
             'student_id' => $enrollment->student_id,
             'course_id' => $enrollment->assigned_course_id,
-            'exam_date' => Carbon::parse($enrollment->registration_date)->addDays(rand(45, 90)),
+            'exam_date' => $this->getRealisticExamDate($enrollment),
             'listening_score' => $listeningScore,
             'speaking_score' => $speakingScore,
             'reading_score' => $readingScore,
@@ -71,12 +71,29 @@ class ExamResultSeeder extends Seeder
         ExamResult::create([
             'student_id' => $enrollment->student_id,
             'course_id' => $enrollment->assigned_course_id,
-            'exam_date' => Carbon::parse($enrollment->registration_date)->addDays(rand(45, 90)),
+            'exam_date' => $this->getRealisticExamDate($enrollment),
             'listening_score' => $scores[0],
             'speaking_score' => $scores[1],
             'reading_score' => $scores[2],
             'writing_score' => $scores[3],
             'overall_status' => 0, // Failed
         ]);
+    }
+
+    private function getRealisticExamDate($enrollment)
+    {
+        $registrationDate = Carbon::parse($enrollment->registration_date);
+        $now = Carbon::now();
+
+        // Exam date should be between 30-120 days after registration
+        // but not in the future
+        $examDate = $registrationDate->addDays(rand(30, 120));
+
+        // If exam date is in the future, set it to a recent past date
+        if ($examDate->isFuture()) {
+            $examDate = $now->subDays(rand(1, 30));
+        }
+
+        return $examDate;
     }
 }

@@ -49,23 +49,26 @@ class CourseEnrollmentSeeder extends Seeder
 
     private function getRandomStatus()
     {
-        $statuses = [0, 1, 1, 1, 2, 2, 3]; // 1=pending, 2=studying, 3=passed, 4=failed
+        // Tăng tỷ lệ studying để phù hợp với thực tế
+        $statuses = [1, 2, 2, 2, 2, 3, 3, 4]; // 0=pending, 1=studying, 2=passed, 3=failed
         return $statuses[array_rand($statuses)];
     }
 
     private function getRegistrationDate($status)
     {
+        $now = Carbon::now();
+
         switch ($status) {
-            case 0: // Pending
-                return Carbon::now()->subDays(rand(1, 14));
-            case 1: // Studying
-                return Carbon::now()->subDays(rand(15, 60));
-            case 2: // Passed
-                return Carbon::now()->subDays(rand(61, 180));
-            case 3: // Failed
-                return Carbon::now()->subDays(rand(61, 120));
+            case 1: // Pending - vừa đăng ký gần đây
+                return $now->subDays(rand(1, 7));
+            case 2: // Studying - đang học (1-3 tháng)
+                return $now->subDays(rand(7, 90));
+            case 3: // Passed - đã hoàn thành (2-6 tháng trước)
+                return $now->subDays(rand(60, 180));
+            case 4: // Failed - thất bại (1-4 tháng trước)
+                return $now->subDays(rand(30, 120));
             default:
-                return Carbon::now()->subDays(rand(1, 90));
+                return $now->subDays(rand(1, 60));
         }
     }
 }

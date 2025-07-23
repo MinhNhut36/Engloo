@@ -66,6 +66,7 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
+
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -243,6 +244,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -296,7 +298,7 @@
                         <span class="info-label">Trình độ:</span>
                         <span class="info-value">{{ $course->lesson->level ?? 'N/A' }}</span>
                     </div>
-                    
+
                     <div class="info-item">
                         <i class="fas fa-calendar-alt info-icon"></i>
                         <span class="info-label">Khai giảng:</span>
@@ -311,8 +313,8 @@
                 @endif
 
                 <div class="course-footer">
-                    <a href="{{ route('student.CourseRegister', ['id' => $course->course_id]) }}" 
-                       class="btn-register">
+                    <a href="{{ route('student.CourseRegister', ['id' => $course->course_id]) }}" class="btn-register"
+                        onclick="return confirm('Bạn có chắc chắn muốn đăng ký khóa học này không?')">
                         <i class="fas fa-pen-nib"></i>
                         Đăng ký
                     </a>

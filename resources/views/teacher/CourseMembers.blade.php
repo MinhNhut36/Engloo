@@ -840,7 +840,7 @@
                                                 @endif
                                                 trong lớp này.
                                             </p>
-                                            <a href="{{ route('teacher.grade', $course->course_id) }}"
+                                            <a href="{{ route('teacher.coursemembers', $course->course_id) }}"
                                                 class="btn-clear-search">
                                                 <i class="fas fa-times"></i>
                                                 Xóa bộ lọc

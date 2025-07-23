@@ -91,7 +91,7 @@ class StudentController extends Controller
         //Kiểm tra xem trình độ khóa học sinh viên đăng ký đã có hay chưa
         $courseLevel = Course::find($id)?->level;
         $hasSameLevelStudying = CourseEnrollment::where('student_id', $student->student_id)
-            ->where('status', 1) // Trạng thái đang học
+            ->where('status', 2) // Trạng thái đang học
             ->whereHas('course', function ($query) use ($courseLevel) {
                 $query->where('level', $courseLevel);
             })
@@ -116,7 +116,7 @@ class StudentController extends Controller
     public function ListMyCourses()
     {
         $student = Auth::guard('student')->user();
-        $MyCourses = CourseEnrollment::with('course')->where('student_id', $student->student_id)->where('status', 1)->get();
+        $MyCourses = CourseEnrollment::with('course')->where('student_id', $student->student_id)->where('status', 2)->get();
         return view('student.MyCourses')->with('enrollment', $MyCourses);
     }
 
@@ -232,7 +232,7 @@ class StudentController extends Controller
             ->pluck('course_id')    // chỉ lấy cột course_id
             ->toArray();
 
-        $courseId = CourseEnrollment::with('course')->where('student_id', $studentId)->whereIn('assigned_course_id', $courseIds)->where('status', 1)->value('assigned_course_id');
+        $courseId = CourseEnrollment::with('course')->where('student_id', $studentId)->whereIn('assigned_course_id', $courseIds)->where('status', 2)->value('assigned_course_id');
 
 
         $score = LessonPartScore::create([

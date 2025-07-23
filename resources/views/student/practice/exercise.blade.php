@@ -636,7 +636,7 @@
                         <div class="score-label">Câu đúng</div>
                     </div>
                     <div class="score-percentage">
-                        <span class="percentage-number">${Math.round((correctCount / totalQuestions) * 100)}%</span>
+                        <span class="percentage-number">${Math.round((10 / totalQuestions)*correctCount )}</span>
                         <span class="percentage-label">Điểm số</span>
                     </div>
                 </div>
@@ -798,7 +798,7 @@
                     
                     ${q.feedback ? `
                         <div class="feedback-text">
-                            <strong>Giải thích:</strong> ${q.feedback}
+                            <strong>Phản hồi:</strong> ${q.feedback}
                         </div>
                     ` : ''}
                 </div>

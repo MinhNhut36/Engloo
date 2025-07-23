@@ -186,19 +186,7 @@
                 </div>
             </div>
 
-            <!-- Academic Performance -->
-            <div class="col-lg-8">
-                <div class="card info-card mb-4">
-                    <div class="card-header bg-transparent">
-                        <h5 class="section-title mb-0">
-                            <i class="fas fa-chart-line me-2 text-success"></i>Kết quả học tập
-                        </h5>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
+        
         </div>
     </div>
 @endsection

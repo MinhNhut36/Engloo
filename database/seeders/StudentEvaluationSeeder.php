@@ -49,11 +49,18 @@ class StudentEvaluationSeeder extends Seeder
                 // Final status dựa trên exam result
                 $finalStatus = $this->determineFinalStatus($examResult);
 
+                $evaluationDate = Carbon::parse($examResult->exam_date)->addDays(rand(1, 7));
+
+                // Ensure evaluation date is not in the future
+                if ($evaluationDate->isFuture()) {
+                    $evaluationDate = Carbon::now()->subDays(rand(1, 14));
+                }
+
                 StudentEvaluation::create([
                     'student_id' => $examResult->student_id,
                     'progress_id' => $randomProgress->progress_id,
                     'exam_result_id' => $examResult->exam_result_id,
-                    'evaluation_date' => Carbon::parse($examResult->exam_date)->addDays(rand(1, 7)),
+                    'evaluation_date' => $evaluationDate,
                     'final_status' => $finalStatus,
                     'remark' => $this->getRemarkBasedOnPerformance($examResult, $remarks),
                 ]);

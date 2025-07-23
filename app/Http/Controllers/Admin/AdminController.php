@@ -286,8 +286,8 @@ class AdminController extends Controller
                 $course->update($request->validated());
 
                 $course->enrollments()
-                    ->where('status', '!=', 0)
-                    ->update(['status' => 0]);
+                    ->where('status', '!=', 1)
+                    ->update(['status' => 1]);
             });
 
             return redirect()

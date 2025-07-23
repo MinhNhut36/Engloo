@@ -91,6 +91,14 @@ class LessonPartScoreSeeder extends Seeder
     {
         $baseTime = Carbon::parse($enrollment->registration_date);
         $daysOffset = ($attempt - 1) * rand(7, 14) + rand(1, 7);
-        return $baseTime->addDays($daysOffset);
+        $submitTime = $baseTime->addDays($daysOffset);
+
+        // Ensure submit time is not in the future
+        $now = Carbon::now();
+        if ($submitTime->isFuture()) {
+            $submitTime = $now->subDays(rand(1, 30));
+        }
+
+        return $submitTime;
     }
 }

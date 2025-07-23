@@ -21,10 +21,17 @@ class StudentProgressSeeder extends Seeder
             // Completion status dựa trên điểm số (>= 7.0 là hoàn thành)
             $completionStatus = $score->score >= 7.0 ? true : false;
 
+            $lastUpdated = Carbon::parse($score->submit_time)->addMinutes(rand(1, 30));
+
+            // Ensure last_updated is not in the future
+            if ($lastUpdated->isFuture()) {
+                $lastUpdated = Carbon::now()->subMinutes(rand(1, 60));
+            }
+
             StudentProgress::create([
                 'score_id' => $score->score_id,
                 'completion_status' => $completionStatus,
-                'last_updated' => Carbon::parse($score->submit_time)->addMinutes(rand(1, 30)),
+                'last_updated' => $lastUpdated,
             ]);
         }
     }

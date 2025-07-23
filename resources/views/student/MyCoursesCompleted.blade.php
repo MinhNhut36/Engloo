@@ -318,7 +318,15 @@
                                         {{ Carbon::parse($examResult->course->starts_date)->format('d/m/Y') }}
                                     </span>
                                 </div>
-
+                                <div class="stat-item">
+                                    <span class="stat-label">
+                                        <i class="fas fa-calendar-alt me-2 text-primary"></i> {{-- icon lịch --}}
+                                        Ngày kết thúc:
+                                    </span>
+                                    <span class="stat-value">
+                                        {{ \Carbon\Carbon::parse($examResult->course->end_date)->format('d/m/Y') }}
+                                    </span>
+                                </div>
                                 <div class="stat-item">
                                     <span class="stat-label">
                                         <i class="fas fa-book me-2 text-warning"></i>
